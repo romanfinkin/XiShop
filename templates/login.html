@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            background: black;
+            min-height: 100%;
+            margin: 0;
+            font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+        }
+        #page-root {
+            padding: 1px;
+        }
+        #login {
+            display: none;
+        }
+        #login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.15);
+            margin: 15% auto 0 auto;
+        }
+        #login-container label {
+            display: block;
+        }
+        #login-container input {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+        }
+        #login-title {
+            background: black;
+            padding: 10px 20px;
+            color: white;
+            font-size: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        #login-form {
+            background: black;
+            color: white;
+            flex-grow: 1;
+            border-radius: 0 0 10px 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #login-form-submit {
+            width: unset !important;
+        }
+        #header {
+            background: rgb(0, 0, 0);
+            max-height: 80px;
+            min-height: 80px;
+            padding: 0 20px;
+            color: white;
+            box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+            font-size: 24px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #logo {
+            margin-left: 10px;
+            width: 80px;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <div>
+        <a href="{% url 'index' %}"><img id="logo" src="{% static 'xiaomi-logo.png' %}" /></a>
+    </div>
+    <div>
+
+    </div>
+</div>
+
+<form id="login" method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+</form>
+
+<div id="page-root">
+    <div id="login-container">
+        <div id="login-title">
+            Please, sign in
+        </div>
+        <div id="login-form">
+            <label for="login-form-username">Username:</label>
+            <input id="login-form-username" form="login" name="username" required />
+            <label for="login-form-password">Password:</label>
+            <input id="login-form-password" form="login" name="password" type="password" required />
+            <input id="login-form-submit" form="login" type="submit" value="Sign in" />
+            <div>
+                <a href="{% url 'register' %}">Sign up</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

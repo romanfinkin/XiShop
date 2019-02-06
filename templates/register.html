@@ -1,0 +1,121 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            min-height: 100%;
+            margin: 0;
+            background: black;
+            font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+        }
+        #page-root {
+            padding: 1px;
+        }
+        #login {
+            display: none;
+        }
+        #login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.15);
+            margin: 15% auto 0 auto;
+        }
+        #login-container label {
+            display: block;
+        }
+        #login-container input {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+        }
+        #login-title {
+            background: black;
+            padding: 10px 20px;
+            color: white;
+            font-size: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        #login-form {
+            background: black;
+            color: white;
+            flex-grow: 1;
+            border-radius: 0 0 10px 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #login-form-submit {
+            width: unset !important;
+        }
+        #logo {
+            margin-left: 10px;
+            width: 80px;
+            height: 60px;
+        }
+        #header {
+            background: rgb(0, 0, 0);
+            max-height: 80px;
+            min-height: 80px;
+            padding: 0 20px;
+            color: white;
+            box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+            font-size: 24px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+    <script>
+        const check_password = function(event) {
+            const input1 = document.getElementById('login-form-password');
+            const input2 = document.getElementById('login-form-confirm-password');
+            if (input1.value !== input2.value) {
+                event.stopImmediatePropagation();
+                event.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="header">
+    <div>
+        <a href="{% url 'index' %}"><img id="logo" src="{% static 'xiaomi-logo.png' %}" /></a>
+    </div>
+    <div>
+
+    </div>
+</div>
+
+<form id="login" method="post" action="{% url 'register' %}" onsubmit="check_password(event)">
+    {% csrf_token %}
+</form>
+
+<div id="page-root">
+    <div id="login-container">
+        <div id="login-title">
+            Please, sign in
+        </div>
+        <div id="login-form">
+            <label for="login-form-username">Username:</label>
+            <input id="login-form-username" form="login" name="username" required />
+            <label for="login-form-password">Password:</label>
+            <input id="login-form-password" form="login" name="password" type="password" required />
+            <label for="login-form-confirm-password">Confirm password:</label>
+            <input id="login-form-confirm-password" form="login" type="password" required />
+            <input id="login-form-submit" form="login" type="submit" value="Sign up" />
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

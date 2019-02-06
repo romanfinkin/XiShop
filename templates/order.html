@@ -1,0 +1,139 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order page</title>
+    <style>
+       html {
+            height: 100%;
+        }
+        body {
+            background: black;
+            min-height: 100%;
+            margin: 0;
+            font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+        }
+        #page-root {
+            padding: 1px;
+        }
+        #order {
+            display: none;
+        }
+        #order-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.15);
+            margin: 15% auto 0 auto;
+        }
+        #login-container label {
+            display: block;
+        }
+        #login-container input {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+        }
+        #order-title {
+            background: black;
+            padding: 10px 20px;
+            color: white;
+            font-size: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        #order-form {
+            background: black;
+            color: white;
+            flex-grow: 1;
+            border-radius: 0 0 10px 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #order-form-submit {
+            width: unset !important;
+        }
+        #header {
+            background: rgb(0, 0, 0);
+            max-height: 80px;
+            min-height: 80px;
+            padding: 0 20px;
+            color: white;
+            box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+            font-size: 24px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #logo {
+            margin-left: 10px;
+            width: 80px;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <div>
+        <a href="{% url 'index' %}"><img id="logo" src="{% static 'xiaomi-logo.png' %}" /></a>
+    </div>
+    <div>
+
+    </div>
+</div>
+
+<form id="order" method="post" action="{% url 'order' %}">
+    {% csrf_token %}
+</form>
+
+<div id="page-root">
+    <div id="order-container">
+        <div id="order-title">
+            Please, enter data
+        </div>
+        <div id="order-form">
+            <div>
+                <label>First name:</label >
+                <input form="order" name="first_name" required />
+            </div>
+            <div>
+                <label>Second name:</label>
+                <input form="order" name="second_name" required />
+            </div>
+            <div>
+                <label>Country:</label>
+                <input form="order" name="country" required />
+            </div>
+            <div>
+                <label>City:</label>
+                <input form="order" name="city" required />
+            </div>
+            <div>
+                <label>Street:</label>
+                <input form="order" name="street" required />
+            </div>
+            <div>
+                <label>Building:</label>
+                <input form="order" name="building" required />
+            </div>
+            <div>
+                <label>Flat:</label>
+                <input form="order" name="flat" required />
+            </div>
+            <div>
+                <label>Item:</label>
+                <input form="order" name="item" required />
+            </div>
+            <div id="order-form-submit">
+                <input id="order-form-submit" form="order" type="submit" value="Ordered" />
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

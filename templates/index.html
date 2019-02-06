@@ -1,0 +1,131 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Internet Shop Xiaomi</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            background: rgb(200, 200, 200);
+            min-height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            align-items: stretch;
+        }
+        #header {
+            background: rgb(0, 0, 0);
+            max-height: 80px;
+            min-height: 80px;
+            padding: 0 20px;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #footer {
+            background: rgb(0, 0, 0);
+            max-height: 30px;
+            min-height: 30px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        #dev {
+            margin-right: 30px;
+        }
+        #content {
+            color: black;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 20px;
+        }
+        #logo {
+            margin-left: 10px;
+            width: 80px;
+            height: 60px;
+        }
+        #exit {
+            width: 25px;
+            height: 25px;
+        }
+        #enter {
+            width: 25px;
+            height: 25px;
+        }
+        #phone {
+            width: 600px;
+            height: 600px;
+        }
+        #products {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        #product {
+            text-align: center;
+            font: 20pt sans-serif;
+            font-weight: bold;
+        }
+        #order {
+            margin-left: 80%;
+        }
+        #order_img {
+            width: 70px;
+            height: 70px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="header">
+    <div>
+        <a href="{% url 'index' %}"><img id="logo" src="{% static 'xiaomi-logo.png' %}" /></a>
+    </div>
+    <div id="order">
+        <a href="{% url 'order' %}"><img id="order_img" src="{% static 'order.png' %}" /></a>
+    </div>
+    <div>
+
+        <div>
+            Hello, {% if username %}{{ username }}{% else %}guest{% endif %}!
+            {% if username %}
+            <a href="{% url 'logout' %}"><img id="exit" src="{% static 'logout.png' %}" /></a>
+            {% else %}
+            <a href="{% url 'login' %}"><img id="enter" src="{% static 'login.png' %}" /></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<div id="content">
+    <div id="products">
+            {% for product in products %}
+                <div id="product">
+                    <a href="{% url 'product' id=product.id %}"> <img id="phone" src="{{ product.image_url }}"/></a>
+                    <p>{{ product.title }} </p>
+                    <p>{{ product.price }} {{ product.currency }}</p>
+                </div>
+            {% endfor %}
+    </div>
+</div>
+
+<div id="footer">
+    <div id="dev">
+        developed by Roman Finkin
+    </div>
+</div>
+</body>
+</html>
